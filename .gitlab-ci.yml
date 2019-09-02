@@ -14,7 +14,7 @@ before_script:
 pages:
   stage: deploy
   script:
-    - pytest --nbval *.ipynb
+    #- pytest --nbval *.ipynb
     - jupyter nbconvert --TagRemovePreprocessor.remove_cell_tags='{"remove_cell"}' --Exporter.preprocessors='["preprocessor.HighlightExercises", "preprocessor.PageLinks", "preprocessor.SetTitle", "preprocessor.HideWriteFileMagic"]' --template=course *.ipynb
     - sed -i '/href/s/ipynb/html/g' *.html
     - mkdir -p public
