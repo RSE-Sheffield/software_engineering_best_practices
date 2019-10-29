@@ -28,6 +28,8 @@
 <div class="prompt input_prompt">
     {%- if cell.metadata.writefile is defined -%}
         {{ cell.metadata.writefile }}
+    {%- elif cell.metadata.runcommand is defined -%}
+        $
     {%- elif cell.execution_count is defined -%}
         In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]:
     {%- else -%}

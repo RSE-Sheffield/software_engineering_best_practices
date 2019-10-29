@@ -7,3 +7,7 @@
 	text-align: center;
 	font-weight: bold;
 }
+
+.prompt {
+	min-width: 18ex;
+}

@@ -76,6 +76,20 @@ class HideWriteFileMagic(Preprocessor):
                 cell["source"] = cell["source"][to_remove:]
 
                 cell["outputs"] = []
+            elif cell["source"].startswith("%run"):
+                file_name = cell["source"].split()[1]
+                cell.metadata["runcommand"] = ""
+
+                cell["source"] = f"python {file_name}"
+            elif cell["source"].startswith("!"):
+                command = cell["source"][1:]
+                if "COLUMNS=" in command:
+                    command = command[len("COLUMNS=nn")+1:]
+                if "venv/bin/" in command:
+                    command = command[9:]
+                cell.metadata["runcommand"] = ""
+
+                cell["source"] = command
             else:
                 if "execution_count" in cell:
                     execution_count += 1
