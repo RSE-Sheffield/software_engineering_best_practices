@@ -1,5 +1,7 @@
-.exercise {
+div .exercise {
 	background-color: LemonChiffon;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #main-title {
