@@ -9,14 +9,13 @@ cache:
     - venv/
 
 before_script:
-  - pip install jupyter pytest nbval pyyaml
+  - pip install jupyter pytest nbval pyyaml git+https://gitlab.com/milliams/nbpretty.git
 
 pages:
   stage: deploy
   script:
     #- pytest --nbval *.ipynb
-    - jupyter nbconvert --TagRemovePreprocessor.remove_cell_tags='{"remove_cell"}' --Exporter.preprocessors='["preprocessor.HighlightExercises", "preprocessor.PageLinks", "preprocessor.SetTitle", "preprocessor.HideWriteFileMagic", "preprocessor.SetTitle"]' --template=course *.ipynb
-    - sed -i '/href/s/ipynb/html/g' *.html
+    - nbpretty *.ipynb
     - mkdir -p public
     - mv 00*.html index.html
     - cp *.{html,png,css} public/ || true
