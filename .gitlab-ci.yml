@@ -1,4 +1,4 @@
-image: python:3.7
+image: python:3.8
 
 variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
@@ -9,12 +9,19 @@ cache:
     - venv/
 
 before_script:
-  - pip install jupyter pytest nbval pyyaml git+https://gitlab.com/milliams/nbpretty.git
+  - pip install -r requirements-dev.txt
+
+test:
+  stage: test
+  script:
+    - pytest --nbval --sanitize-with sanitize.cfg --junit-xml=rspec.xml *.ipynb
+  artifacts:
+    reports:
+      junit: rspec.xml
 
 pages:
   stage: deploy
   script:
-    #- pytest --nbval *.ipynb
     - nbpretty .
     - mkdir -p public
     - cp *.{html,png,css} public/ || true
