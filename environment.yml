@@ -1,0 +1,6 @@
+name: sebp
+channels:
+  - defaults
+dependencies:
+  - anaconda
+  - python=3.8.2
