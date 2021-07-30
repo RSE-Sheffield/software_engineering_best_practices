@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat|Source+Code+Pro&display=swap');
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+div .exercise > .inner_cell {
+	background-color: LemonChiffon;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Libre Baskerville', serif;
+}
+
+#main-title {
+	/*font-family: 'Raleway', sans-serif;*/
+	font-size: 4em;
+	text-align: center;
+	font-weight: bold;
+}
+
+div#notebook {
+	font-size: initial;
+	line-height: 140%;
+	padding-bottom: 100px;
+}
+
+pre, code, .prompt {
+	font-size: initial;
+	font-family: 'Source Code Pro', monospace;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.rendered_html p code {
+        padding-top: 0px;
+        padding-bottom: 0px;
+}
+
+#notebook-container {
+	box-shadow: none;
+}
+
+div#notebook-container {
+	padding: 0;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+  }
+}
+
+.prompt {
+	min-width: 18ex;
+}
+
+img.icon {
+	box-shadow: none;
+	width: 50px
+}
+
+.rendered-html img {
+	box-shadow: 0 0 5px gray;
+}
+
+div .outline {
+	outline-style: dashed;
+	outline-width: 2px;
+	outline-color: lightgray;
+	margin-top: 2px;
+}
+
+input.custom_block_checkbox {
+	display: none;
+}
+
+.collapsible {
+	max-height: 0;
+	overflow: hidden;
+}
+
+input:checked ~ .collapsible {
+	max-height: 100%;
+}
+
+.custom_block_prompt {
+	filter: grayscale(100%);
+}
+
+input:checked ~ .custom_block_prompt {
+	filter: grayscale(0%);
+}
+
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: contents;
+  }
+}
+
+dl {
+	margin-top: 1em;
+}
+
+dd {
+	margin-left: 1.5em;
+}

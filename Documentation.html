@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>Documentation - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Make sure you have an environment where you can write Python code and run terminal commands such as we set up with JupyterLab in the last section.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In previous sessions you have learned how to package code into functions and to package functions into modules. Functions and modules let you design, write and package your code so that it is easy to understand and easily reusable. However, to share the code, and allow users to really understand how it works, you need to add documentation.</p>
+<p>You can access the documentation for any object using the Python <code>help</code> function or using <code>?</code> in the interactive Python console. For example, lets look at the documentation for the <code>print</code> function that we have used many times. Go to the Console and run:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>print<span class="o">?</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>it should return something that looks like:</p>
+
+<pre><code>Docstring:
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+Prints the values to a stream, or to sys.stdout by default.
+Optional keyword arguments:
+file:  a file-like object (stream); defaults to the current sys.stdout.
+sep:   string inserted between values, default a space.
+end:   string appended after the last value, default a newline.
+flush: whether to forcibly flush the stream.
+Type:      builtin_function_or_method</code></pre>
+<p>This <em>docstring</em> as it calls it (for documentation string) is a human-written piece of text which is there to help you, the programmer, know how to use the function.</p>
+<p>The <code>?</code> syntax is an IPython-specific thing but you can use the equivalent <code>help</code> function anywhere. If you run:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on built-in function print in module builtins:
+
+print(...)
+    print(value, ..., sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+    Optional keyword arguments:
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+    sep:   string inserted between values, default a space.
+    end:   string appended after the last value, default a newline.
+    flush: whether to forcibly flush the stream.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>then you should see a very similar output.</p>
+<p>Throughout this chapter we will be learning how to make our own docstrings and how to create nice readable documentation web pages.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Documenting-our-own-functions">Documenting our own functions<a class="anchor-link" href="#Documenting-our-own-functions">&#182;</a></h2><p>Let's start by writing a simple function in a module by itself which we can import and use. To begin we'll explore this in the Python Console and then we'll move onto putting this code into a module. For this example we'll use the <code>add_arrays</code> function from previous courses. Type the following into the Python Console:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_elem</span><span class="p">,</span> <span class="n">y_elem</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_elem</span> <span class="o">+</span> <span class="n">y_elem</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see what the documentation for this function is, we either type <code>add_arrays?</code> or:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">add_arrays</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on function add_arrays in module __main__:
+
+add_arrays(x, y)
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By default, the only documentation available for a function is just a repeat of whatever we wrote on the <code>def</code> line, so we see the name of the function along with the parameters available for it.</p>
+<p>If we want to give the user some more information, we can pass it is by putting a string as the first thing inside the function. By convention we use a triple-quoted string which both starts and ends with three <code>"</code> in a row as they allow you to have strings over multiple lines:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function adds together each element of the two</span>
+<span class="sd">    passed lists, returning the result in the returned list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_elem</span><span class="p">,</span> <span class="n">y_elem</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_elem</span> <span class="o">+</span> <span class="n">y_elem</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, when we ask for the documentation, we should see our docstring printed:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">add_arrays</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on function add_arrays in module __main__:
+
+add_arrays(x, y)
+    This function adds together each element of the two
+    passed lists, returning the result in the returned list.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can write whatever text you like in the documentation string, the most important thing is that you give the users of your code the information they need. Useful information for a user of the function are things like:</p>
+<ul>
+<li>What arguments it takes</li>
+<li>What it returns</li>
+<li>An example of how to use it</li>
+</ul>
+<p>There are a number of different conventions of how to format documentation strings but a common one is the Google style which looks like:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function adds together each element of the two passed lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (list): The first list to add</span>
+<span class="sd">        y (list): The second list to add</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: the pairwise sums of ``x`` and ``y``.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])</span>
+<span class="sd">        [5, 7, 10]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_</span> <span class="o">+</span> <span class="n">y_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can check that this works by again doing:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">add_arrays</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on function add_arrays in module __main__:
+
+add_arrays(x, y)
+    This function adds together each element of the two passed lists.
+    
+    Args:
+        x (list): The first list to add
+        y (list): The second list to add
+    
+    Returns:
+        list: the pairwise sums of ``x`` and ``y``.
+    
+    Examples:
+        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])
+        [5, 7, 10]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a lot more information and it might seem strange that the documentation is longer than the code it describes but it's very important that you give the user of your code all the information that they need in order to use it. Remember, your documentation is only going to be written once but it will be read many times so it's worth spending the time on it.</p>
+<p>In this example we have given a short one-line description of what the function does. Then  we explicitly listed all of the arguments to the function along with what type they expect. After that we specified the type and description of the return value. Finally, and importantly we give an example to the user of how the function can be called and the output that it will give. The <code>&gt;&gt;&gt;</code> go in front of the line of calling Python code and the return value is on the line after.</p>
+<p>You can find more examples of the Google documentation style in the <a href="https://www.sphinx-doc.org/en/master/usage/extensions/example_google.html">official Sphinx documentation</a>.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Documenting-modules">Documenting modules<a class="anchor-link" href="#Documenting-modules">&#182;</a></h2><p>As well as functions, we can document whole modules. To do this, we'll have to move our function into a file called <code>arrays.py</code>. From previous courses, you should remember that this will make a module called <code>arrays</code> which we can import.</p>
+<p>To document a module you use the same triple-quoted string as in functions but this time it goes at the very top of the file.</p>
+<p>In the file editor, make a file called <code>arrays.py</code> and put the following in it:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions for manipulating and combining Python lists.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function adds together each element of the two passed lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (list): The first list to add</span>
+<span class="sd">        y (list): The second list to add</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: the pairwise sums of ``x`` and ``y``.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])</span>
+<span class="sd">        [5, 7, 10]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_</span> <span class="o">+</span> <span class="n">y_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can then import the module in the Python Console:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">arrays</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once it is imported we can get the documentation for the function with:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">arrays</span><span class="o">.</span><span class="n">add_arrays</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on function add_arrays in module arrays:
+
+add_arrays(x, y)
+    This function adds together each element of the two passed lists.
+    
+    Args:
+        x (list): The first list to add
+        y (list): The second list to add
+    
+    Returns:
+        list: the pairwise sums of ``x`` and ``y``.
+    
+    Examples:
+        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])
+        [5, 7, 10]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But we can also get the documentation for the whole module with:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">arrays</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on module arrays:
+
+NAME
+    arrays - This module contains functions for manipulating and combining Python lists.
+
+FUNCTIONS
+    add_arrays(x, y)
+        This function adds together each element of the two passed lists.
+        
+        Args:
+            x (list): The first list to add
+            y (list): The second list to add
+        
+        Returns:
+            list: the pairwise sums of ``x`` and ``y``.
+        
+        Examples:
+            &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])
+            [5, 7, 10]
+
+FILE
+    /home/matt/projects/courses/software_engineering_best_practices/arrays.py
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You'll see in this case that it's showing the overall module docstring as well as those for the functions inside it.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Run the example code from the documentation in the Console. Make sure that you are seeing the same output as shown in the docs.</p>
+<ul>
+<li>hint: remember that the <code>add_arrays</code> function is inside the <code>arrays</code> module so you either have to import it as <code>from arrays import add_arrays</code> or run it with <code>arrays.add_arrays</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Documentation-driven-development">Documentation-driven-development<a class="anchor-link" href="#Documentation-driven-development">&#182;</a></h2><p>It's always worth writing some documentation for each of your functions but you can go a step further and use a method known as <em>documentation-driven-development</em>. In this model you write the function signature and documentation for the function first, before writing any of the code inside it. This encourages you to think ahead of time about exactly what your function will do, how it will be called by users and what you expect it to return.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generating-documentation-web-pages">Generating documentation web pages<a class="anchor-link" href="#Generating-documentation-web-pages">&#182;</a></h2><p>As well as viewing your documentation in the Python Console, it's possible to automatically create web pages to share your documentation. This is not a necessary part of this course but if you are interested later, have a look at the <a href="appendix_sphinx.html">appendix on the tool Sphinx</a>.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="index.html"><font size="5">Previous</font></a><font size="5"> | </font><a href="Licensing.html"><font size="5">Next</font></a></p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

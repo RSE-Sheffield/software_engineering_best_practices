@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>wer_final_rot13_fix - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">rot13.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">_lower_cipher</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">[:</span><span class="mi">13</span><span class="p">]</span>
+<span class="n">_upper_cipher</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[:</span><span class="mi">13</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encode a message from English to ROT13</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        message (str): the English message to encode</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The encoded message</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; encode(&quot;Secretmessage&quot;)</span>
+<span class="sd">        &#39;Frpergzrffntr&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_lower_cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_upper_cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Add this else statement</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot encode </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">. Character </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not valid&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encode a message from ROT13 to English</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        message (str): the ROT13 message to encode</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The decoded message</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; encode(&quot;Frpergzrffntr&quot;)</span>
+<span class="sd">        &#39;Secretmessage&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">_lower_cipher</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">_lower_cipher</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># ascii_uppercase → ascii_lowercase</span>
+        <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">_upper_cipher</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">_upper_cipher</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Add this else statement</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot decode </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">. Character </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> not valid&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="c1"># An alternate &quot;clever&quot; solution is to exploit the fact that rot13 is its own inverse</span>
+    <span class="c1"># and simply call the encode function again. The entirety of this function would then</span>
+    <span class="c1"># just become:</span>
+    <span class="c1">#</span>
+    <span class="c1"># return encode(message)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">test_rot13.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">rot13</span> <span class="kn">import</span> <span class="n">encode</span><span class="p">,</span> <span class="n">decode</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;message, expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;FRPERG&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="s2">&quot;frperg&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_encode</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">encode</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;message, expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;FRPERG&quot;</span><span class="p">,</span> <span class="s2">&quot;SECRET&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;frperg&quot;</span><span class="p">,</span> <span class="s2">&quot;secret&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_decode</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">decode</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="k">def</span> <span class="nf">test_encode_spaces_error</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">encode</span><span class="p">(</span><span class="s2">&quot;Secret message for you&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="n">modules</span> <span class="n">morse</span><span class="o">.</span><span class="n">py</span> <span class="n">rot13</span><span class="o">.</span><span class="n">py</span> <span class="n">test_morse</span><span class="o">.</span><span class="n">py</span> <span class="n">test_rot13</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 21 items                                         
+
+morse.py::morse.decode <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                        [  4%]</span>
+morse.py::morse.encode <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                        [  9%]</span>
+rot13.py::rot13.decode <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                        [ 14%]</span>
+rot13.py::rot13.encode <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                        [ 19%]</span>
+test_morse.py::test_encode[SOS-... --- ...] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">   [ 23%]</span>
+test_morse.py::test_encode[help-.... . .-.. .--.] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 28%]</span>
+test_morse.py::test_encode[-] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                 [ 33%]</span>
+test_morse.py::test_encode[ -/] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">               [ 38%]</span>
+test_morse.py::test_decode[... --- ...-sos] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">   [ 42%]</span>
+test_morse.py::test_decode[.... . .-.. .--.-help] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 47%]</span>
+test_morse.py::test_decode[/- ] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">               [ 52%]</span>
+test_morse.py::test_error <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                     [ 57%]</span>
+test_morse.py::test_errors[It&#39;s sinking] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">      [ 61%]</span>
+test_morse.py::test_errors[Titanic &amp; Olympic] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 66%]</span>
+test_morse.py::test_errors[This boat is expensive \xa3\xa3\xa3] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 71%]</span>
+test_morse.py::test_errors[Help!] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">             [ 76%]</span>
+test_rot13.py::test_encode[SECRET-FRPERG] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 80%]</span>
+test_rot13.py::test_encode[secret-frperg] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 85%]</span>
+test_rot13.py::test_decode[FRPERG-SECRET] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 90%]</span>
+test_rot13.py::test_decode[frperg-secret] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 95%]</span>
+test_rot13.py::test_encode_spaces_error <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">       [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">21 passed</span><span class="ansi-green-fg"> in 0.06s</span><span class="ansi-green-fg"> ====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

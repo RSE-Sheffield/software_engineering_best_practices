@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>wer_simple_doc_message - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The file <code>index.rst</code> should look like</p>
+<div class="highlight"><pre><span></span><span class="cp">.. Arrays documentation master file, created by</span>
+<span class="cp">   sphinx-quickstart on Wed Oct 16 15:33:52 2019.</span>
+<span class="cp">   You can adapt this file completely to your liking, but it should at least</span>
+<span class="cp">   contain the root `toctree` directive.</span>
+
+<span class="gh">Welcome to Arrays&#39;s documentation!</span>
+<span class="gh">==================================</span>
+
+<span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 2
+   <span class="nc">:caption:</span> Contents:
+
+This documentation site is all about the arrays module and how to use it.
+
+<span class="gh">Indices and tables</span>
+<span class="gh">==================</span>
+
+<span class="m">*</span> <span class="na">:ref:</span><span class="nv">`genindex`</span>
+<span class="m">*</span> <span class="na">:ref:</span><span class="nv">`modindex`</span>
+<span class="m">*</span> <span class="na">:ref:</span><span class="nv">`search`</span>
+</pre></div>
+<p>and should create an output like:</p>
+<p><img src="arrays_page2.png" alt="Arrays documentation" title="Arrays documentation"></p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

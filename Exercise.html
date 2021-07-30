@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>Exercise - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Final-exercise">Final exercise<a class="anchor-link" href="#Final-exercise">&#182;</a></h1><p>We've now covered all the topics on this course so to finish off, work through this final exercise. It is designed to give you a chance to practise what you've learned on some new code.</p>
+<p>Make a new directory called <code>crypto</code>. In the Terminal change to that directory with <code>cd crypto</code> and in the Python Console change there with <code>%cd crypto</code>. In that directory make two new files called <code>morse.py</code> and <code>test_morse.py</code>:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">morse.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A lookup dictionary which, given a letter will return the morse code equivalent</span>
+<span class="n">_letter_to_morse</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="s1">&#39;-...&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="s1">&#39;-.-.&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="s1">&#39;-..&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span><span class="s1">&#39;..-.&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;g&#39;</span><span class="p">:</span><span class="s1">&#39;--.&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span><span class="s1">&#39;....&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">:</span><span class="s1">&#39;.---&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span><span class="s1">&#39;-.-&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span><span class="s1">&#39;.-..&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">:</span><span class="s1">&#39;---&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span><span class="s1">&#39;.--.&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span><span class="s1">&#39;--.-&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span><span class="s1">&#39;.-.&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;u&#39;</span><span class="p">:</span><span class="s1">&#39;..-&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span><span class="s1">&#39;...-&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span><span class="s1">&#39;.--&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="s1">&#39;-..-&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="s1">&#39;-.--&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="s1">&#39;--..&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;0&#39;</span><span class="p">:</span><span class="s1">&#39;-----&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span><span class="s1">&#39;.----&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span><span class="s1">&#39;..---&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span><span class="s1">&#39;...--&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span><span class="s1">&#39;....-&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;5&#39;</span><span class="p">:</span><span class="s1">&#39;.....&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">:</span><span class="s1">&#39;-....&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">:</span><span class="s1">&#39;--...&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span><span class="s1">&#39;---..&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span><span class="s1">&#39;----.&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39; &#39;</span><span class="p">:</span><span class="s1">&#39;/&#39;</span><span class="p">}</span>
+
+<span class="c1"># This will create a dictionary that can go from the morse back to the letter</span>
+<span class="n">_morse_to_letter</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">_letter_to_morse</span><span class="p">:</span>
+    <span class="n">morse</span> <span class="o">=</span> <span class="n">_letter_to_morse</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+    <span class="n">_morse_to_letter</span><span class="p">[</span><span class="n">morse</span><span class="p">]</span> <span class="o">=</span> <span class="n">letter</span>
+
+
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">morse</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="n">letter</span> <span class="o">=</span> <span class="n">letter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">morse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_letter_to_morse</span><span class="p">[</span><span class="n">letter</span><span class="p">])</span>
+
+    <span class="c1"># We need to join together Morse code letters with spaces</span>
+    <span class="n">morse_message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">morse</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">morse_message</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">english</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Now we cannot read by letter. We know that morse letters are</span>
+    <span class="c1"># separated by a space, so we split the morse string by spaces</span>
+    <span class="n">morse_letters</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">morse_letters</span><span class="p">:</span>
+        <span class="n">english</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_morse_to_letter</span><span class="p">[</span><span class="n">letter</span><span class="p">])</span>
+
+    <span class="c1"># Rejoin, but now we don&#39;t need to add any spaces</span>
+    <span class="n">english_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">english</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">english_message</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_morse.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">morse</span> <span class="kn">import</span> <span class="n">encode</span><span class="p">,</span> <span class="n">decode</span>
+
+<span class="k">def</span> <span class="nf">test_encode</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">encode</span><span class="p">(</span><span class="s2">&quot;SOS&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;... --- ...&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This module is designed to convert message to and from <a href="https://en.wikipedia.org/wiki/Morse_code">Morse code</a>. It provides one function which takes an English message and converts it to a Morse code string, separated by spaces and another function which takes the Morse code string and converts it to English.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>Add documentation to the <code>morse</code> module and to the <code>encode</code> and <code>decode</code> functions. Make sure you detail the inputs, outputs and give an example of their usage. Look at the tests to get an idea of how it works or try importing <code>morse</code> in the Python Console and have a play with the functions to understand them.</li>
+</ul>
+<p><a href="answer_final_morse_doc.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>Add a test for the <code>decode</code> function to <code>test_morse.py</code> and check it passes with <code>pytest</code></li>
+<li>Parametrise both tests to give several examples<ul>
+<li>Make sure you include upper and lower case letters as well as checking what happens if you pass in empty strings</li>
+</ul>
+</li>
+<li>Make sure to use <code>--doctest-modules</code> to run the documentation examples that you added in the last exercise</li>
+<li>Hint: When writing doctests, it cares whether your test output uses single or double quotes (<code>'</code> or <code>"</code>). Use single quotes for doctest outputs.</li>
+</ul>
+<p><a href="answer_final_morse_test.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>What happens if you pass in the string <code>"Don't forget to save us"</code> to <code>encode</code>?<ul>
+<li>Hint: The problem is caused by the <code>'</code> in the string</li>
+</ul>
+</li>
+<li>Edit <code>morse.py</code> to raise a <code>ValueError</code> in this situation instead.</li>
+<li>Write a test to make sure that the <code>ValueError</code> is raised when a string with a <code>'</code> is passed in.</li>
+<li>Parametrise that test with some other examples including the <code>&amp;</code> and <code>£</code> characters.</li>
+</ul>
+<p><a href="answer_final_morse_error.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Another-cypher">Another cypher<a class="anchor-link" href="#Another-cypher">&#182;</a></h2><p>Let's add another text cypher to our <code>crypto</code> package. This time we will implement the <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar Cipher</a> or <a href="https://en.wikipedia.org/wiki/ROT13">ROT13</a>. Once more the module will provide <code>encode</code> and <code>decode</code> functions:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">rot13.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">_lower_cipher</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">[:</span><span class="mi">13</span><span class="p">]</span>
+<span class="n">_upper_cipher</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[:</span><span class="mi">13</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_lower_cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_upper_cipher</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">_lower_cipher</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">_lower_cipher</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">_upper_cipher</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">_upper_cipher</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>Add documentation for the <code>rot13</code> module.</li>
+</ul>
+<p><a href="answer_final_rot13_doc.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This time the tests are provided for you. Copy this into a new file called <code>test_rot13.py</code>:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_rot13.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">rot13</span> <span class="kn">import</span> <span class="n">encode</span><span class="p">,</span> <span class="n">decode</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;message, expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;FRPERG&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="s2">&quot;frperg&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_encode</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">encode</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;message, expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;FRPERG&quot;</span><span class="p">,</span> <span class="s2">&quot;SECRET&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;frperg&quot;</span><span class="p">,</span> <span class="s2">&quot;secret&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_decode</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">decode</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="k">def</span> <span class="nf">test_encode_spaces_error</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">encode</span><span class="p">(</span><span class="s2">&quot;Secret message for you&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we run these tests with <code>pytest</code> we see that there are some passes and some failures:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered celltag_nbval-ignore-output">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="n">test_rot13</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 5 items                                          
+
+test_rot13.py::test_encode[SECRET-FRPERG] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 20%]</span>
+test_rot13.py::test_encode[secret-frperg] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 40%]</span>
+test_rot13.py::test_decode[FRPERG-SECRET] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">     [ 60%]</span>
+test_rot13.py::test_decode[frperg-secret] <span class="ansi-red-fg">FAILED</span><span class="ansi-red-fg">     [ 80%]</span>
+test_rot13.py::test_encode_spaces_error <span class="ansi-red-fg">FAILED</span><span class="ansi-red-fg">       [100%]</span>
+
+========================= FAILURES =========================
+<span class="ansi-red-intense-fg ansi-bold">________________ test_decode[frperg-secret] ________________</span>
+
+message = &#39;frperg&#39;, expected = &#39;secret&#39;
+
+    <span class="ansi-white-fg">@pytest</span>.mark.parametrize(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">message, expected</span><span class="ansi-yellow-fg">&#34;</span>, [
+        (<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">FRPERG</span><span class="ansi-yellow-fg">&#34;</span>, <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">SECRET</span><span class="ansi-yellow-fg">&#34;</span>),
+        (<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">frperg</span><span class="ansi-yellow-fg">&#34;</span>, <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">secret</span><span class="ansi-yellow-fg">&#34;</span>),
+    ])
+    <span class="ansi-blue-intense-fg">def</span> <span class="ansi-green-intense-fg">test_decode</span>(message, expected):
+&gt;       <span class="ansi-blue-intense-fg">assert</span> decode(message) == expected
+<span class="ansi-red-intense-fg ansi-bold">E       AssertionError: assert &#39;SECRET&#39; == &#39;secret&#39;</span>
+<span class="ansi-red-intense-fg ansi-bold">E         - secret</span>
+<span class="ansi-red-intense-fg ansi-bold">E         + SECRET</span>
+
+<span class="ansi-red-intense-fg ansi-bold">test_rot13.py</span>:18: AssertionError
+<span class="ansi-red-intense-fg ansi-bold">_________________ test_encode_spaces_error _________________</span>
+
+    <span class="ansi-blue-intense-fg">def</span> <span class="ansi-green-intense-fg">test_encode_spaces_error</span>():
+        <span class="ansi-blue-intense-fg">with</span> pytest.raises(<span class="ansi-cyan-intense-fg">ValueError</span>):
+&gt;           encode(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">Secret message for you</span><span class="ansi-yellow-fg">&#34;</span>)
+<span class="ansi-red-intense-fg ansi-bold">E           Failed: DID NOT RAISE &lt;class &#39;ValueError&#39;&gt;</span>
+
+<span class="ansi-red-intense-fg ansi-bold">test_rot13.py</span>:22: Failed
+================= short test summary info ==================
+FAILED test_rot13.py::test_decode[frperg-secret] - Assert...
+FAILED test_rot13.py::test_encode_spaces_error - Failed: ...
+<span class="ansi-red-fg">=============== </span><span class="ansi-red-intense-fg ansi-bold">2 failed</span>, <span class="ansi-green-fg">3 passed</span><span class="ansi-red-fg"> in 0.10s</span><span class="ansi-red-fg"> ================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>There are two failing tests:</p>
+<ol>
+<li><code>test_rot13.py::test_decode[frperg-secret]</code> is failing due to a bug in the code. Find the bug in <code>rot13.py</code> and fix it so that the test passes.</li>
+<li><code>test_rot13.py::test_encode_spaces_error</code> is failing due to a missing feature in our code. At the moment any spaces in the string are ignored. Change <code>encode</code> and <code>decode</code> in <code>rot13.py</code> so that they raise an error if any letter in the message is not found in the lookup string.<ul>
+<li>Hint: You should add an <code>else</code> to the <code>if</code>/<code>elif</code> blocks</li>
+</ul>
+</li>
+</ol>
+<p><a href="answer_final_rot13_fix.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>Add a test to both <code>test_morse.py</code> and <code>test_rot13.py</code> which checks for "round-tripping". That is, check that a valid message which is passed to <code>encode</code> and then the output of that is passed to <code>decode</code> gets you back the original message.</li>
+<li>What types of messages do not round-trip correctly in <code>morse</code>? What could you do to the test to make it pass?</li>
+</ul>
+<p><a href="answer_final_rot13_roundtrip.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="Fixtures.html"><font size="5">Previous</font></a><font size="5"> | </font><a href="Summary.html"><font size="5">Next</font></a></p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

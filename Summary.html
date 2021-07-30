@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>Summary - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h1><p>Well done for getting this far!</p>
+<p>In this course we've covered some important elements of professional software development:</p>
+<ul>
+<li>Documentation<ul>
+<li>What should be documented</li>
+<li>How to make your documentation accessible as HTML</li>
+</ul>
+</li>
+<li>Licensing</li>
+<li>Testing<ul>
+<li>How to test your code</li>
+<li>Why to test your code</li>
+<li>Parametrising your tests</li>
+<li>Checking for expected errors</li>
+<li>Providing test data in fixtures</li>
+</ul>
+</li>
+</ul>
+<p>I consider these three topics to be essential for effective software development along with version control through a tool such as Git.</p>
+<p>You don't need to have tested very single corner of your code and you don't need to have perfect docstrings for your functions but just having something is better than having nothing. These techniques are not about being <em>perfect</em> but simply about being <em>better</em>.</p>
+<p>Things to read up on or attend courses about next would likely be:</p>
+<ul>
+<li><strong>Version control</strong> using Git<ul>
+<li>including collaborative development with a platform like GitHub or GitLab using Pull Requests</li>
+</ul>
+</li>
+<li><strong>Automated testing</strong>, also referred to as <em>continuous integration</em> or <em>continuous testing</em></li>
+<li><strong>Code quality</strong> checks (such as pycodestyle, Pylint and MyPy in Python)</li>
+<li><strong>Packaging</strong> your software for easy distribution (e.g. using PyPI for Python)</li>
+</ul>
+<p>For information on some of these topics, a good source is <a href="https://docs.python-guide.org">The Hitchhiker's Guide to Python</a>, particularly the section on <a href="https://docs.python-guide.org/#writing-great-python-code">Writing Great Python Code</a>.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Credits">Credits<a class="anchor-link" href="#Credits">&#182;</a></h2><p>This course was written by Matt Williams. All text is published under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International
+License</a> with all code snippets licensed as MIT.</p>
+<p>The source for the material can be found on <a href="https://gitlab.com/milliams/software_engineering_best_practices">GitLab</a> where fixes are welcome.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="Exercise.html"><font size="5">Previous</font></a></p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

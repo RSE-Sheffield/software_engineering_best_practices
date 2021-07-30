@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>endix_sphinx - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Appendix:-Generating-documentation-web-pages">Appendix: Generating documentation web pages<a class="anchor-link" href="#Appendix:-Generating-documentation-web-pages">&#182;</a></h1><p>Providing documentation for your functions inside the Python Console is a useful thing to do but it's expected of most publicly published projects to also have a web-browsable version as well. There is a tool for Python called <a href="https://www.sphinx-doc.org">Sphinx</a> which does exactly that.</p>
+<p>Make sure Sphinx is installed. Test in the Terminal that <code>sphinx-build</code> exists by running it and checking that it returns the message:</p>
+
+<pre><code>usage: sphinx-build [OPTIONS] SOURCEDIR OUTPUTDIR [FILENAMES...]
+sphinx-build: error: the following arguments are required: sourcedir, outputdir, filenames</code></pre>
+<p>If it is not installed then either:</p>
+<ul>
+<li>install it into the base environment through Anaconda Navigator</li>
+<li>or create a new environment, install both <code>jupyterlab</code> and <code>sphinx</code> and then restart JupyterLab in that environment.</li>
+</ul>
+<p>Open up the terminal and make sure that you are in the correct directory. You can check this by running <code>ls</code> if you are on Linux or MacOS or <code>dir</code> if you are running Windows. You should see <code>arrays.py</code> listed in the output.</p>
+<p>We are now going to create a set of Sphinx configuration files. Sphinx provides a tool called <code>sphinx-quickstart</code> for this purpose which will ask you a few questions and create all the files it needs. In the Terminal, type:</p>
+<p><code>sphinx-quickstart</code></p>
+<p>and answer the questions it asks in the following way:</p>
+<ul>
+<li><code>n</code> to <code>Separate source and build directories</code></li>
+<li>Set the project name to <code>Arrays</code></li>
+<li>Enter your name as the <code>Author name</code></li>
+<li>Just press enter for <code>Project release</code></li>
+<li>Just press enter for <code>Project language</code></li>
+</ul>
+<p>After that it should return you to the Terminal prompt.</p>
+<p>Now that we have the configuration for Sphinx set up, run <code>make html</code> which will go ahead and generate the documentation and create some HTML files on your computer. To find out where they went, run the following in the Python Console:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;file://</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/_build/html/index.html&quot;</span><span class="p">)</span>
+</pre></div>
+<p>That will print out something like <code>file:///home/matt/bestpractices/_build/html/index.html</code>. Copy and paste that into the URL bar in your web browser and it should bring up the documentation. It should look like:</p>
+<p><img src="arrays_page1.png" alt="Arrays documentation" title="Arrays documentation"></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Add some text (it doesn't matter too much what you write) between the <code>toctree</code> block and <code>Indices and tables</code> in <code>index.rst</code>. Make sure that it is not indented at all. Regenerate the documentation pages with <code>make html</code> and refresh your web browser. You should see the text appear. <a href="answer_simple_doc_message.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Adding-our-documentation-to-Sphinx">Adding our documentation to Sphinx<a class="anchor-link" href="#Adding-our-documentation-to-Sphinx">&#182;</a></h2><p>In order for our function and module documentation to show up in the HTML pages we need to make a few tweaks to the Sphinx configuration.</p>
+<p>First we need to enable the <code>autodoc</code> extension so that Sphinx can create documentation pages from Python source code and the <code>napoleon</code> extension so that it understands the Google-style docstrings. Open <code>conf.py</code> (it's a normal Python file) and find the <code>extensions</code> variable. It will be defined to be an empty list. Edit it so that it reads:</p>
+<div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sphinx.ext.napoleon&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+<p>The other change we need to make in <code>conf.py</code> is is to allow Sphinx to import our <code>arrays</code> module. To allow this it needs to have the current directory in its search path. Find on lines 13, 14, and 15 the lines that read:</p>
+<div class="highlight"><pre><span></span><span class="c1"># import os</span>
+<span class="c1"># import sys</span>
+<span class="c1"># sys.path.insert(0, os.path.abspath(&#39;.&#39;))</span>
+</pre></div>
+<p>and uncomment them so that they look like:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+</pre></div>
+<p>This is all the configuration changes we need to make. We're now ready to tell Sphinx about our module. To do this we will put some special code in a file called <code>arrays.rst</code> whcih Sphinx will interpret to find our source code and documentation.</p>
+<p>Create a new files called <code>arrays.rst</code> and put the following:</p>
+<div class="highlight"><pre><span></span><span class="gh">arrays module</span>
+<span class="gh">=============</span>
+
+<span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> arrays
+   <span class="nc">:members:</span>
+   <span class="nc">:undoc-members:</span>
+   <span class="nc">:show-inheritance:</span>
+</pre></div>
+<p>Then edit the <code>toctree</code> directive in <code>index.rst</code> to look like:</p>
+<div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 2
+   <span class="nc">:caption:</span> Contents:
+
+   arrays
+</pre></div>
+<p>being careful to check that the indentation is correct and lines up.</p>
+<p>Run <code>make html</code> once more and refresh the documentation HTML page. On the main page, click "arrays module". This will take you to the page with the documentation. It should look like:</p>
+<p><img src="arrays_page3.png" alt="Arrays documentation" title="Arrays documentation"></p>
+<p>You'll see here that the module docstring is shown at the top, followed by the documentation for the function. It's formatted the parameters and return types nicely and has even highlighted the example as Python code.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ul>
+<li>Try changing the theme to one from <a href="https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes">https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sphinx is by far the most commonly used documentation tool for Python projects. It's even used by <a href="https://docs.python.org">the official Python documentation</a>. If you have your Python project hosted at a publicly visible Git hosting site like GitHub, GitLab or Bitbucket, there is a free service called <a href="https://readthedocs.org">Read The Docs</a> which can build and host your pages for you.</p>
+<p>When using Git or any other version control software, you should make sure you check in your documentation sources alongside your code. For Sphinx, make sure you add <code>conf.py</code>, any <code>rst</code> files you create manually and the "make" files. Do not commit to Git any HTML output from running Sphinx.</p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

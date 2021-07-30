@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+
+<title>Testing - Best practices in software engineering</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<style type="text/css">
+    @import 'oNmeLFPs3BZEPiaf.css'
+    </style>
+<style type="text/css">
+    @import 'ibOwrQihLoOmFm0z.css'
+    </style>
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+function hide_unhide(name) {
+    var checks = document.querySelectorAll("input.custom_block_"+name);
+    for (check of checks) {
+        check.checked = !check.checked;
+    }
+}
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <h1 id="main-title">Best practices in software engineering</h1>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Testing">Testing<a class="anchor-link" href="#Testing">&#182;</a></h1><p>Testing is extremely important. Without testing, you cannot be sure that your code is doing what you think. Testing is an integral part of software development, and where possible should be done <em>while</em> you are writing code, not after the code has been written.</p>
+<p>No doubt so far, you have been manually checking that your code does the right thing. Perhaps you are running your code over a particular input file and making sure that you get a correct-looking plot out at the end? Or maybe running it with a few known inputs and checking that you got what you got last time? This is a start but how can you be sure that there's not a subtle bug that means that the output is incorrect? And if there <em>is</em> a problem, how will you be able to work out exactly which line of code it causing it?</p>
+<p>In order to be confident that our code it giving a correct output, a <em>test suite</em> is useful which provides a set of known inputs and checks that the code matches a set of known, expected outputs. To make it easier to locate where a bug is occuring, it's a good idea to make each individual test run over as small an amount of code as possible so that if <em>that</em> test fails, you know where to look for the problem. In Python this "small unit of code" is usually a function.</p>
+<p>Let's get started by making sure that our <code>add_arrays</code> function matches the outputs we expect. As a reminder, this is what the file <code>arrays.py</code> looks like:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions for manipulating and combining Python lists.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function adds together each element of the two passed lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (list): The first list to add</span>
+<span class="sd">        y (list): The second list to add</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: the pairwise sums of ``x`` and ``y``.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])</span>
+<span class="sd">        [5, 7, 10]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_</span> <span class="o">+</span> <span class="n">y_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since the name of the module we want to test is <code>arrays</code>, let's make a file called <code>test_arrays.py</code> which contains the following:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BROKEN&quot;</span><span class="p">)</span>
+
+<span class="n">test_add_arrays</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This script defines a function called <code>test_add_arrays</code> which defines some known inputs (<code>a</code> and <code>b</code>) and a known, matching output (<code>expect</code>). It passes them to the function <code>add_arrays</code> and compares the output to <code>expected</code>. It will either print <code>OK</code> or <code>BROKEN</code> depending on whether it's working or not. Finally, we explicitly call the test function.</p>
+<p>When we run the script in the Terminal, we see it output <code>OK</code>:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">python</span> <span class="n">test_arrays</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OK
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">&#182;</a></h3><p>Break the test by changing either <code>a</code>, <code>b</code> or <code>expected</code> and rerun the test script. Make sure that it prints <code>BROKEN</code> in this case. Change it back to a working state once you've done this.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Asserting">Asserting<a class="anchor-link" href="#Asserting">&#182;</a></h2><p>The method used here works and runs the code correctly but it doesn't give very useful output. If we had five test functions in our file and three of them were failing we'd see something like:</p>
+
+<pre><code>OK
+BROKEN
+OK
+BROKEN
+BROKEN</code></pre>
+<p>We'd then have to cross-check back to our code to see which tests the <code>BROKEN</code>s referred to.</p>
+<p>To be able to automatically relate the output of the failing test to the place where your test failed, you can use an <code>assert</code> statement.</p>
+<p>An <code>assert</code> statement is followed by something which is either <em>truthy</em> or <em>falsy</em>. A falsy expression is something which, when converted to a <code>bool</code> gives <code>False</code>. This includes empty lists, the number <code>0</code> and <code>None</code>; everything else is considered truthy. The full list is available in <a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">the documentation</a>.</p>
+<p>If it is truthy then nothing happens but if it is falsy then an exception is raised:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_raises-exception">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-6-05598cd61862&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">assert</span> <span class="ansi-cyan-fg">5</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">6</span>
+
+<span class="ansi-red-fg">AssertionError</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can now use this <code>assert</code> statement in place of the <code>if</code>/<code>else</code> block:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+
+<span class="n">test_add_arrays</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now when we run the test script we get nothing printed on success:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">python</span> <span class="n">test_arrays</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>but on a failure we get an error printed like:</p>
+
+<pre><code>Traceback (most recent call last):
+  File "test_arrays.py", line 13, in &lt;module&gt;
+    test_add_arrays()
+  File "test_arrays.py", line 11, in test_add_arrays
+    assert output == expect
+AssertionError</code></pre>
+<p>Which, like all exception messages gives us the location in the file at which the error occurred. This has the avantage that if we had many test functions being run it would tell us which one failed and on which line.</p>
+<p>The downside of using an <code>assert</code> like this is that as soon as one test fails, the whole script will halt and you'll only be informed of that one test.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pytest">pytest<a class="anchor-link" href="#pytest">&#182;</a></h2><p>There's a few things that we've been doing so far that could be improved. Firstly, for every test function that we write we then have to explicitly call it at the bottom of the test script like <code>test_add_arrays()</code>. This is error-prone as we might write a test function and forget to call it and then we would miss any errors it would catch.</p>
+<p>Secondly, we want nice, useful output from our test functions. Something better than the nothing/exception that a plain <code>assert</code> gives us. It would be nice to get a green <code>PASSED</code> for the good tests and a red <code>FAILED</code> for the bad ones alongside the name of the test in question.</p>
+<p>Finally, we want to make sure that all tests are run even if a test early in the process fails.</p>
+<p>Luckily, there is tool called <em>pytest</em> which can give us all of these things. It will work on our test script almost exactly as written with only one change needed.</p>
+<p>Remove the call to <code>test_add_arrays()</code> on the last line of the file:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And in the Terminal, run <code>pytest</code>:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 1 item                                           
+
+test_arrays.py <span class="ansi-green-fg">.</span><span class="ansi-green-fg">                                     [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">1 passed</span><span class="ansi-green-fg"> in 0.02s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pytest will do two stages. First it will try to locate all the test functions that it can find and then it will run each of them in turn, reporting the results.</p>
+<p>Here you can see that it's found that the file <code>test_arrays.py</code> contains a single test function. The green dot next to the name of the file signifies the passing test. It then prints a summary at the end saying "1 passed".</p>
+<p>The way that <code>pytest</code> works is that it looks for files which are called <code>test_*.py</code> or <code>*_test.py</code> and look inside those for functions whose names begin with <code>test</code>. It will then run those functions one at a time, reporting the results of each in turn.</p>
+<p>To see what it looks like when you have a failing test, let's deliberately break the test code by giving a wrong expected result:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">999</span><span class="p">]</span>  <span class="c1"># Changed this to break the test</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we run this test with <code>pytest</code> it should tell us that the test is indeed failing:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 1 item                                           
+
+test_arrays.py <span class="ansi-red-fg">F</span><span class="ansi-red-fg">                                     [100%]</span>
+
+========================= FAILURES =========================
+<span class="ansi-red-intense-fg ansi-bold">_____________________ test_add_arrays ______________________</span>
+
+    <span class="ansi-blue-intense-fg">def</span> <span class="ansi-green-intense-fg">test_add_arrays</span>():
+        a = [<span class="ansi-blue-intense-fg">1</span>, <span class="ansi-blue-intense-fg">2</span>, <span class="ansi-blue-intense-fg">3</span>]
+        b = [<span class="ansi-blue-intense-fg">4</span>, <span class="ansi-blue-intense-fg">5</span>, <span class="ansi-blue-intense-fg">6</span>]
+        expect = [<span class="ansi-blue-intense-fg">5</span>, <span class="ansi-blue-intense-fg">7</span>, <span class="ansi-blue-intense-fg">999</span>]  <span class="ansi-black-intense-fg"># Changed this to break the test</span>
+    
+        output = add_arrays(a, b)
+    
+&gt;       <span class="ansi-blue-intense-fg">assert</span> output == expect
+<span class="ansi-red-intense-fg ansi-bold">E       assert [5, 7, 9] == [5, 7, 999]</span>
+<span class="ansi-red-intense-fg ansi-bold">E         At index 2 diff: 9 != 999</span>
+<span class="ansi-red-intense-fg ansi-bold">E         Use -v to get the full diff</span>
+
+<span class="ansi-red-intense-fg ansi-bold">test_arrays.py</span>:11: AssertionError
+================= short test summary info ==================
+FAILED test_arrays.py::test_add_arrays - assert [5, 7, 9]...
+<span class="ansi-red-fg">==================== </span><span class="ansi-red-intense-fg ansi-bold">1 failed</span><span class="ansi-red-fg"> in 0.10s</span><span class="ansi-red-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The output from this is better than we saw with the plain <code>assert</code>. It's printing the full context of the contents of the test function with the line where the <code>assert</code> is failing being marked with a <code>&gt;</code>. It then gives an expanded explanation of why the assert failed. Before we just got <code>AssertionError</code> but now it prints out the contents of <code>output</code> and <code>expect</code> and tells us that at index 2 of the list it's finding a <code>9</code> where we told it to expect a <code>999</code>.</p>
+<p>Before continuing, make sure that you change the file back to its previous contents by changing that <code>999</code> back to a <code>9</code>.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-2">Exercise 2<a class="anchor-link" href="#Exercise-2">&#182;</a></h3><p>Make sure you can run the test as it is written here. See what happens when you make the test fail.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Avoid-repeating-ourselves">Avoid repeating ourselves<a class="anchor-link" href="#Avoid-repeating-ourselves">&#182;</a></h2><p>Having a single test for a function is already infinitely better than having none, but one test only gives you so much confidence. The real power of a test suite is being able to test your functions under lots of different conditions.</p>
+<p>Lets add a second test to check a different set of inputs and outputs to the <code>add_arrays</code> function and check that it passes:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays1</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays2</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we run <code>pytest</code> we can optionally pass the <code>-v</code> flag which puts it in <em>verbose</em> mode. This will print out the tests being run, one per line which I find a more useful view most of the time:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 2 items                                          
+
+test_arrays.py::test_add_arrays1 <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">              [ 50%]</span>
+test_arrays.py::test_add_arrays2 <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">              [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">2 passed</span><span class="ansi-green-fg"> in 0.07s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see both tests being run and passing. This will work well but we've had to repeat ourselves almost entirely in each test function. The only difference between the two functions is the inputs and outputs under test. Usually in this case in a normal Python function you would take these things as arguments and we can do the same thing here.</p>
+<p>The actual logic of the function is the following:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+</pre></div>
+<p>We then just need a way of passing the data we want to check into this function. Since we're not explicitly calling this function ourselves, we need a way to tell pytest that it should pass in certain arguments. For this, pytest provides a feature called <em>parametrisation</em>. We label our function with a <em>decoration</em> which allows pytest to run it mutliple times with different data.</p>
+<p>To use this feature we must import the <code>pytest</code> module and use the <code>pytest.mark.parametrize</code> decorator like the following:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;a, b, expect&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>   <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]),</span>
+    <span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>parametrize</code> decorator takes two arguments:</p>
+<ol>
+<li>a string containing the names of the parameters you want to pass in (<code>"a, b, expect"</code>)</li>
+<li>a list containing the values of the arguments you want to pass in</li>
+</ol>
+<p>In this case, the test will be run twice. Once with each of the following values:</p>
+<ol>
+<li><code>a=[1, 2, 3]</code>, <code>b=[4, 5, 6]</code>, <code>expect=[5, 7, 9]</code></li>
+<li><code>a=[-1, -5, -3]</code>, <code>b=[-4, -3, 0]</code>, <code>expect=[-5, -8, -3]</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 2 items                                          
+
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 50%]</span>
+test_arrays.py::test_add_arrays[a1-b1-expect1] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">2 passed</span><span class="ansi-green-fg"> in 0.03s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Running <code>pytest</code> we see that both tests have the same name (<code>test_arrays.py::test_add_arrays</code>) but each parametrisation is differentiated with some square brackets.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-3">Exercise 3<a class="anchor-link" href="#Exercise-3">&#182;</a></h3><ul>
+<li>Add some more parameters sets to the <code>test_add_arrays</code> function. Try to think about corner-cases that might make the function fail. It's your job as the tester to try to "break" the code. <a href="answer_pytest_parametrise.html"><small>answer</small></a></li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Failing-correctly">Failing correctly<a class="anchor-link" href="#Failing-correctly">&#182;</a></h2><p>The interface of a function is made up of the <em>parameters</em> it expects and the values that it <em>returns</em>. If a user of a function knows these things then they are able to use it correctly. This is why we make sure to include this information in the docstring for all our functions.</p>
+<p>The other thing that is part of the interface of a function is any exceptions that are <em>raised</em> by it. If you need a refresher on exceptions and error handling in Python, take a look at <a href="../intermediate_python/Exceptions.html">the chapter on it in the Intermediate Python course</a>.</p>
+<p>To add explicit error handling to our function we need to do two things:</p>
+<ol>
+<li>add in a conditional <code>raise</code> statement:<div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Both arrays must have the same length.&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li>document in the docstring the fact that the function may raise something:
+<pre><code>Raises:
+    ValueError: If the length of the lists ``x`` and ``y`` are different.</code></pre>
+</li>
+</ol>
+<p>Let's add these to <code>arrays.py</code>:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions for manipulating and combining Python lists.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">add_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function adds together each element of the two passed lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (list): The first list to add</span>
+<span class="sd">        y (list): The second list to add</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: the pairwise sums of ``x`` and ``y``.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the length of the lists ``x`` and ``y`` are different.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])</span>
+<span class="sd">        [5, 7, 10]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Both arrays must have the same length.&quot;</span><span class="p">)</span>
+    
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_</span> <span class="o">+</span> <span class="n">y_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can then test that the function correctly raises the exception when passed appropriate data.  Inside a pytest function we can require that a specific exception is raised by using <a href="https://docs.pytest.org/en/latest/reference.html#pytest-raises"><code>pytest.raises</code></a> in a <code>with</code> block. <code>pytest.raises</code> takes as an argument the type of an exception and if the block ends without that exception having been rasied, will fail the test.</p>
+<p>It may seem strange that we're testing-for and <em>requiring</em> that the function raises an error but it's important that if we've told our users that the code will produce a certain error in specific circumstances that it does indeed do as we promise.</p>
+<p>In our code we add a new test called <code>test_add_arrays_error</code> which does the check we require:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">test_arrays.py</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">arrays</span> <span class="kn">import</span> <span class="n">add_arrays</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;a, b, expect&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>   <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]),</span>
+    <span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">expect</span>
+
+<span class="k">def</span> <span class="nf">test_add_arrays_error</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">add_arrays</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 3 items                                          
+
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 33%]</span>
+test_arrays.py::test_add_arrays[a1-b1-expect1] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 66%]</span>
+test_arrays.py::test_add_arrays_error <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">         [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">3 passed</span><span class="ansi-green-fg"> in 0.03s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-4">Exercise 4<a class="anchor-link" href="#Exercise-4">&#182;</a></h3><ul>
+<li>Make sure you can run the <code>test_add_arrays_error</code> test and that it passes.</li>
+<li>If you have time, try parametrising the <code>test_add_arrays_error</code> test fuction.</li>
+</ul>
+<p><a href="answer_test_raises.html"><small>answer</small></a></p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Doctests">Doctests<a class="anchor-link" href="#Doctests">&#182;</a></h2><p>If you remember from when we were documenting our <code>add_arrays</code> function, we had a small section which gave the reader an example of how to use the function:</p>
+
+<pre><code>Examples:
+    &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])
+    [5, 7, 10]</code></pre>
+<p>Since this is valid Python code, we can ask pytest to run this code and check that the output we claimed would be returned is correct. If we pass <code>--doctest-modules</code> to the <code>pytest</code> command, it will search <code>.py</code> files for docstrings with example blocks and run them:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="n">modules</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 4 items                                          
+
+arrays.py::arrays.add_arrays <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">                  [ 25%]</span>
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 50%]</span>
+test_arrays.py::test_add_arrays[a1-b1-expect1] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 75%]</span>
+test_arrays.py::test_add_arrays_error <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">         [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">4 passed</span><span class="ansi-green-fg"> in 0.18s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see here the <code>arrays.py::arrays.add_arrays</code> test which has passed. If you get a warning about deprecation then ignore it, this is from a third-party module which is leaking through.</p>
+<p>Doctests are a really valuable thing to have in your test suite as they ensure that any examples that you are giving work as expected. It's not uncommon for the code to change and for the documentation to be left behind and being able to automatically check all your examples avoids this.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered exercise"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>See what happens when you break your doctest and run <code>pytest</code> again.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Running-specific-tests">Running specific tests<a class="anchor-link" href="#Running-specific-tests">&#182;</a></h2><p>As you increase the number of tests you will come across situations where you only want to run a particular test. To do this, you follow pass the name of the test, as printed by <code>pytest -v</code> as an argument to <code>pytest</code>. So, if we want to run all tests in <code>test_arrays.py</code> we do:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="n">test_arrays</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 3 items                                          
+
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 33%]</span>
+test_arrays.py::test_add_arrays[a1-b1-expect1] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 66%]</span>
+test_arrays.py::test_add_arrays_error <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg">         [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">3 passed</span><span class="ansi-green-fg"> in 0.01s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Or, if we want to specifically run the <code>test_add_arrays</code> test:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="n">test_arrays</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_add_arrays</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 2 items                                          
+
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [ 50%]</span>
+test_arrays.py::test_add_arrays[a1-b1-expect1] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">2 passed</span><span class="ansi-green-fg"> in 0.01s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Or, if we want to run one test specifically:</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">$</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;test_arrays.py::test_add_arrays[a0-b0-expect0]&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">=================== test session starts ====================</span>
+platform linux -- Python 3.8.5, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/matt/projects/courses/software_engineering_best_practices
+plugins: requests-mock-1.8.0
+collected 1 item                                           
+
+test_arrays.py::test_add_arrays[a0-b0-expect0] <span class="ansi-green-fg">PASSED</span><span class="ansi-green-fg"> [100%]</span>
+
+<span class="ansi-green-fg">==================== </span><span class="ansi-green-intense-fg ansi-bold">1 passed</span><span class="ansi-green-fg"> in 0.01s</span><span class="ansi-green-fg"> =====================</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Take a look at the output of <code>pytest -h</code> for more options. For example, you can tell <code>pytest</code> to only run the tests that failed on the last run with <code>pytest --last-failed</code>.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Testing-during-development">Testing during development<a class="anchor-link" href="#Testing-during-development">&#182;</a></h2><p>When developing code I recommend starting your day by running the test suite. This gives you confidence in the code before you start playing around with it. Then after each set of changes, run the tests again to make sure that you have not broken anything.</p>
+<p>As you add new feature and functions to your code, add tests for them straight away. Doing this while the code logic is fresh in your mind will make the test writing much easier. Even better is to write the tests for the code directly alongside the new function. This gives you a structured way of checking your function while you work on it. You're likely doing manual testing of your code as you write it anyway so why not automate it so that once you're finished you've improved your test suite for free!</p>
+<p>Some people go a step further and follow a process called <em>test-driven development</em> where the first thing you do is write the docstring for the function, describing what the function will take as arguments and what it will return. Once you know that, you can write a test which will, in principle, pass if the function does as described. Only then will they go ahead and write the body of the function and once the test passes, their job is done.</p>
+<p>These techniques are part of a spectrum so find the place on it which makes you the most productive in the long-term. When I started programming I never wrote tests but as I've progressed I've found that they make writing correct code much easier and I couldn't write software without them. You will likely find a progression towards a more structured approach over time.</p>
+<p>You don't need to worry over covering every single line of code with tests. If you have zero tests then you have effectively zero confidence that your code works. As soon as you add a single one, your confidence starts growing. The more you add, the safer you are. There's no magic number of tests.</p>
+<h2 id="Automated-tests">Automated tests<a class="anchor-link" href="#Automated-tests">&#182;</a></h2><p>We will not cover it in this course but once you have a good test suite and if your source code is hosted on a public Git website then you can make it so that the tests of your code are automatically run on every change. As long as you commit your <code>test_*.py</code> to Git files then with a few lines of config you are able to make it run your tests for you. This is especially useful once you are collaborating with other people as the atuomated tests will give you confidence that the new feature your colleage is adding has not broken the code you wrote last week for example.</p>
+
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="Licensing.html"><font size="5">Previous</font></a><font size="5"> | </font><a href="Fixtures.html"><font size="5">Next</font></a></p>
+
+</div>
+</div>
+</div>
+
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>
