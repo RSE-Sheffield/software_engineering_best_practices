@@ -13,8 +13,9 @@ jobs:
         uses: actions/checkout@v2.3.1
 
       - name: Make docs folders
-        run: mkdir docs
-        run: mkdir docs/notebooks
+        run: |
+          mkdir docs
+          mkdir docs/notebooks
 
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
