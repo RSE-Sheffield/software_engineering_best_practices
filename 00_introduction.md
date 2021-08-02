@@ -1,3 +1,3 @@
 # Introduction
 
-[Introduction notebook](docs/notebooks/index.html)
+[Introduction notebook](notebooks/index.html)
