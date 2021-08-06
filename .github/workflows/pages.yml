@@ -37,7 +37,7 @@ jobs:
             --self-contained   
             -t slidy
             -o docs/index.html
-            00_introduction.md
+            00_index.md
             
       - name: Convert testing markdown slides
         uses: docker://pandoc/core:latest
