@@ -54,3 +54,7 @@
 ## Publish
 
 - GitHub
+
+## University of Sheffield advice
+
+- Talk to [Research Software Engineering team](https://rse.shef.ac.uk/)
