@@ -38,6 +38,15 @@ jobs:
             -t slidy
             -o docs/index.html
             00_introduction.md
+
+      - name: Convert documentation markdown slides
+        uses: docker://pandoc/core:latest
+        with:
+          args: >-  # allows you to break string into multiple lines
+            --self-contained   
+            -t slidy
+            -o docs/documentation.html
+            01_documentation.md
             
       - name: Convert testing markdown slides
         uses: docker://pandoc/core:latest
