@@ -19,7 +19,6 @@ jobs:
         run: |
           mkdir docs
           mkdir docs/notebooks
-          ls -lha
 
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
@@ -34,7 +33,7 @@ jobs:
           nbpretty .
           cp *.{html,png,css} docs/notebooks/ || true
 
-      - name: Convert markdown slides - Index
+      - name: Convert slides - Index
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
@@ -43,7 +42,7 @@ jobs:
             -o docs/Index.html
             00_Index.md
         
-      - name: Convert markdown slides - Introduction
+      - name: Convert slides - Introduction
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
@@ -52,7 +51,7 @@ jobs:
             -o docs/Introduction.html
             01_Introduction.md
 
-      - name: Convert markdown slides - Licensing
+      - name: Convert slides - Licensing
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
@@ -61,7 +60,7 @@ jobs:
             -o docs/Licensing.html
             02_Licensing.md
 
-      - name: Convert testing markdown slides - Testing
+      - name: Convert markdown slides - Testing
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
@@ -70,7 +69,7 @@ jobs:
             -o docs/Testing.html
             03_Testing.md
 
-      - name: Convert testing markdown slides - Summary
+      - name: Convert markdown slides - Summary
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
