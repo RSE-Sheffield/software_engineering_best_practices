@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir docs
           mkdir docs/notebooks
+          ls -lha
 
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
