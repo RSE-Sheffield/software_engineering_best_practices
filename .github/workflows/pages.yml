@@ -39,8 +39,8 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/index.html
-            00_index.md
+            -o docs/Index.html
+            00_Index.md
             
       - name: Convert testing markdown slides
         uses: docker://pandoc/core:latest
@@ -48,8 +48,8 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/testing.html
-            03_testing.md
+            -o docs/Testing.html
+            03_Testing.md
       
         
       - name: Deploy 🚀
