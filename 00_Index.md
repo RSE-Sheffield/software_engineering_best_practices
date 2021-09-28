@@ -4,15 +4,15 @@ Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/
 
 ## Slides
 
-* [Introduction](Introduction.html)
-* [Licensing](Licensing.html)
-* [Testing](Testing.html)
-* [Summary](Summary.html)
+* [Introduction](introduction.html)
+* [Licensing](licensing.html)
+* [Testing](testing.html)
+* [Summary](summary.html)
 
 ## Notebooks
 
-* [Setup](notebooks/Index.html)
+* [Setup](notebooks/index.html)
 * [Documentation](notebooks/Documentation.html)
 * [Testing](notebooks/Testing.html)
 * [Fixtures](notebooks/Fixtures.html)
-* [Exercise](notebooks/Excercise.html)
+* [Exercise](notebooks/Exercise.html)
