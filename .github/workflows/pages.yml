@@ -39,7 +39,7 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/Index.html
+            -o docs/index.html
             00_Index.md
         
       - name: Convert slides - Introduction
@@ -48,7 +48,7 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/Introduction.html
+            -o docs/introduction.html
             01_Introduction.md
 
       - name: Convert slides - Licensing
@@ -57,7 +57,7 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/Licensing.html
+            -o docs/licensing.html
             02_Licensing.md
 
       - name: Convert markdown slides - Testing
@@ -66,7 +66,7 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/Testing.html
+            -o docs/testing.html
             03_Testing.md
 
       - name: Convert markdown slides - Summary
@@ -75,7 +75,7 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/Summary.html
+            -o docs/summary.html
             99_Summary.md      
         
       - name: Deploy 🚀
