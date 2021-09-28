@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   convert_notebooks:
@@ -30,24 +33,51 @@ jobs:
           nbpretty .
           cp *.{html,png,css} docs/notebooks/ || true
 
-      - name: Convert markdown slides
+      - name: Convert slides - Index
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/index.html
-            00_introduction.md
-      
-     - name: Convert markdown slides
+            -o docs/Index.html
+            00_Index.md
+        
+      - name: Convert slides - Introduction
         uses: docker://pandoc/core:latest
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
             -t slidy
-            -o docs/licensing.html
-            02_licensing.md
-      
+            -o docs/Introduction.html
+            01_Introduction.md
+
+      - name: Convert slides - Licensing
+        uses: docker://pandoc/core:latest
+        with:
+          args: >-  # allows you to break string into multiple lines
+            --self-contained   
+            -t slidy
+            -o docs/Licensing.html
+            02_Licensing.md
+
+      - name: Convert markdown slides - Testing
+        uses: docker://pandoc/core:latest
+        with:
+          args: >-  # allows you to break string into multiple lines
+            --self-contained   
+            -t slidy
+            -o docs/Testing.html
+            03_Testing.md
+
+      - name: Convert markdown slides - Summary
+        uses: docker://pandoc/core:latest
+        with:
+          args: >-  # allows you to break string into multiple lines
+            --self-contained   
+            -t slidy
+            -o docs/Summary.html
+            99_Summary.md      
+        
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
