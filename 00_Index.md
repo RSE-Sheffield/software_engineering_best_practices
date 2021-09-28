@@ -11,8 +11,8 @@ Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/
 
 ## Notebooks
 
-* [Setup](notebooks/Index.html)
+* [Setup](notebooks/index.html)
 * [Documentation](notebooks/Documentation.html)
 * [Testing](notebooks/Testing.html)
 * [Fixtures](notebooks/Fixtures.html)
-* [Exercise](notebooks/Excercise.html)
+* [Exercise](notebooks/Exercise.html)
