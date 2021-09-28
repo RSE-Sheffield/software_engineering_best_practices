@@ -6,6 +6,7 @@ Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/
 
 * [Introduction](Introduction.html)
 * [Licensing](Licensing.html)
+* [Documentation](Documentation.html)
 * [Testing](Testing.html)
 * [Summary](Summary.html)
 
