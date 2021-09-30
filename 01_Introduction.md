@@ -20,7 +20,9 @@ Mix of software engineering and research experience.
 
 # About David
 
-**TODO**
+![David Wilby](images/chickenboy.jpeg){ height=256px }
+
+Former chicken/physics researcher, now research software engineer.
 
 # RSE at Sheffield
 
