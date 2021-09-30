@@ -35,8 +35,7 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t revealjs
-            -V theme=moon
+            -t slidy
             -o docs/index.html
             00_Index.md
         
