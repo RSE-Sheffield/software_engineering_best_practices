@@ -1,22 +1,56 @@
-# Introduction
+# Better Python: Introduction
 
-Welcome to a short course which will introduce you to some techniques and processes which are essential if you are going to be developing professional-quality software.
+<style> .reveal h1 { font-size: 2em; } </style>
 
-For this course we will be focusing on three main topics:
+RSE Team, University of Sheffield, September 2021
+
+# Acknowledgements
+
+Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/software_engineering_best_practices) by Matt Williams.
+
+# Thank you!
+
+Thanks for coming - this course is under development and we'd like feedback.
+
+# About Bob
+
+![Bob Turner](images/bobicorn.jpg){ height=256px }
+
+Mix of software engineering and research experience.
+
+# About David
+
+![David Wilby](images/chickenboy.jpeg){ height=256px }
+
+Former chicken/physics researcher, now research software engineer.
+
+# RSE at Sheffield
+
+![RSE](https://github.com/RSE-Sheffield/RSE-Sheffield.github.io/raw/master/assets/images/logo/rse-logoonly-stroke.png){ height=256px }
+
+13 RSEs, 35 projects / year worth ~£11m total
+
+# Main Topics
+
 1. documentation
 2. licensing
 3. testing
 
-and discussing why they're important and how to integrate them into your code.
+# Delivery
 
-To discover these concepts we will be exploring then in Python but the ideas behind what we're doing here apply to all programming languages. You can do documentation and testing in C, C++, R, Fortran, Julia, Go and Rust but each will have their own tools and techniques. Languages which make going these things easy are good languages for doing software development in.
+Mix of short presentations and self directed exercises.
 
-# Contents
+# Principles are general
 
-* [Setup](notebooks/index.html)
-* [Documentation](notebooks/Documentation.html)
-* [Licensing](notebooks/Licensing.html)
-* [Testing](notebooks/Testing.html)
-* [Fixtures](notebooks/Fixtures.html)
-* [Exercise](notebooks/Exercise.html)
-* [Summary](notebooks/Summary.html)
+We're doing this in `Python`. C, C++, R, Fortran, Julia, Go and Rust have their own specific tools and techniques.
+
+# Running order
+
+1. Presentation - why bother with documentation?
+2. Exercise - documentation.
+3. Presentation - software licensing.
+4. Presentation - why bother with testing?
+5. Exercise - testing.
+6. Check in!
+7. Exercise - fixtures.
+8. Close.

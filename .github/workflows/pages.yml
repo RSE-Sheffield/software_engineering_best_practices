@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  convert_notebooks:
+  build_site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
