@@ -46,7 +46,7 @@ We're doing this in `Python`. C, C++, R, Fortran, Julia, Go and Rust have their 
 
 1. Presentation - why bother with documentation?
 2. Exercise - documentation.
-3. Presentation - software licensing
+3. Presentation - software licensing.
 4. Presentation - why bother with testing?
 5. Exercise - testing.
 6. Check in!
