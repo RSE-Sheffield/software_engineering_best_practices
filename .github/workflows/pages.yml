@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  convert_notebooks:
+  build_site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -44,7 +44,8 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t slidy
+            -t revealjs
+            -V theme=moon
             -o docs/introduction.html
             01_Introduction.md
 
@@ -53,7 +54,8 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t slidy
+            -t revealjs
+            -V theme=moon
             -o docs/licensing.html
             02_Licensing.md
 
@@ -62,7 +64,8 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t slidy
+            -t revealjs
+            -V theme=moon
             -o docs/testing.html
             03_Testing.md
 
@@ -71,7 +74,8 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t slidy
+            -t revealjs
+            -V theme=moon
             -o docs/summary.html
             99_Summary.md      
         
