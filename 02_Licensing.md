@@ -18,7 +18,8 @@ Relaxes conditions imposed by copyright in specific ways.
 * Linux
 * Firefox
 * Python
-* VSCode
+* VSCode (Microsoft)
+* PyTorch (Facebook)
 
 # FAIR Priniciples
 
@@ -44,15 +45,6 @@ The Turing Way project illustration by Scriberia. Used under a CC-BY 4.0 licence
 - The freedom to redistribute copies so you can help others (freedom 2).
 - The freedom to distribute copies of your modified versions to others (freedom 3).
 
-# Types of license
-
-- "Copyleft" e.g. [GPL3](https://choosealicense.com/licenses/gpl-3.0/) - better for academic collaboration
-- More permissive e.g. [MIT](https://choosealicense.com/licenses/mit/) - better for private sector collaboration
-
-[choosealicence.com](choosealicence.com)
-
-*Presenter follow links.*
-
 # Reasons **not** to make code open
 
 - Wait for publication
@@ -69,6 +61,8 @@ Fear of scoop by a competing group.
   - More eyes, less bugs
 
 # Want to commercialise...
+
+Open source software is compatible with capitalism.
 
 Explore options for spin outs / licensing early (*Research Services Impact & IP Team*).
 
@@ -87,12 +81,16 @@ Explore options for spin outs / licensing early (*Research Services Impact & IP 
 - Choose a licence, agreed by everyone on the project.
 - Put the licence text in a file alongside your code.
 - Publish your code somewhere such as GitHub or GitLab.
-- Reference specific versions using [ORDA]().
+- Reference specific versions using [ORDA](https://orda.shef.ac.uk/), [Zenodo](https://zenodo.org/) or equivalent.
 
-# Choose a licence
+# Choose a license
 
-- There are lots of possible ways to license your code, with their own pros and cons. e.g. a website like [choosealicense.com](https://choosealicense.com).
-- How permissive you want to be, e.g. MIT license.
+- "Copyleft" e.g. [GPL3](https://choosealicense.com/licenses/gpl-3.0/) - better for academic collaboration
+- More permissive e.g. [MIT](https://choosealicense.com/licenses/mit/) - better for private sector collaboration
+
+[choosealicence.com](choosealicence.com)
+
+*Presenter follow links.*
 
 # Apply the licence
 
@@ -103,10 +101,10 @@ Explore options for spin outs / licensing early (*Research Services Impact & IP 
 
 # Publish
 
-![](images/auto-license.png)
+![](images/auto-license.png){ height=512px }
 
 # University of Sheffield advice
 
 - [Research Software Engineering team](https://rse.shef.ac.uk/)
-- Library
-- Research Services Impact & IP Team
+- [Library, Research Data Management](https://www.sheffield.ac.uk/library/rdm)
+- [Research Services Impact & IP Team](https://www.sheffield.ac.uk/rs/impact)
