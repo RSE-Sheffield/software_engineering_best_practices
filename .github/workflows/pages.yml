@@ -59,6 +59,16 @@ jobs:
             -o docs/licensing.html
             02_Licensing.md
 
+      - name: Convert markdown slides - Documentation
+        uses: docker://pandoc/core:latest
+        with:
+          args: >-  # allows you to break string into multiple lines
+            --self-contained   
+            -t revealjs
+            -V theme=moon
+            -o docs/documentation.html
+            01_Documentation.md
+
       - name: Convert markdown slides - Testing
         uses: docker://pandoc/core:latest
         with:
