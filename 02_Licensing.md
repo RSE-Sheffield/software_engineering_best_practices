@@ -107,4 +107,6 @@ Explore options for spin outs / licensing early (*Research Services Impact & IP 
 
 # University of Sheffield advice
 
-- Talk to [Research Software Engineering team](https://rse.shef.ac.uk/)
+- [Research Software Engineering team](https://rse.shef.ac.uk/)
+- Library
+- Research Services Impact & IP Team
