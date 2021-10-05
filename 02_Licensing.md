@@ -1,62 +1,109 @@
 # Licensing your code
 
-Why and how (draft guidance).
+<style> .reveal h1 { font-size: 2em; } </style>
+
+Why, when and how (draft guidance, we're not lawyers). [More information](https://milliams.gitlab.io/software_engineering_best_practices/Licensing.html).
+
 
 # Copyright
 
 [Berne Convention](https://en.wikipedia.org/wiki/Berne_Convention) of 1886: Copyright is immediately bestowed upon a work the moment it is created, without requiring any registration.
 
-# Free software or open source software
+# License
+
+Relaxes conditions imposed by copyright in specific ways.
+
+# Examples of open source
+
+* Linux
+* Firefox
+* Python
+* VSCode
+
+# FAIR Priniciples
+
+![](https://the-turing-way.netlify.app/_images/fair-principles.jpg){ height=300px }
+
+The Turing Way project illustration by Scriberia. Used under a CC-BY 4.0 licence. DOI: 10.5281/zenodo.3332807.
+
+# FAIR4RS: We envision a world where:
+
+* All research is reproducible
+* All research software is open
+* All research software is usable by others (for their own research)
+* All contributors to research software are recognized for their work
+* All research software is sustained as long as it is useful
+* All research software is high-quality and robust
+
+[Katz et al. 2021](https://arxiv.org/ftp/arxiv/papers/2101/2101.10883.pdf)
+
+# [Four freedoms (abridged)](https://www.gnu.org/philosophy/free-sw.en.html)
 
 - The freedom to run the program as you wish, for any purpose (freedom 0).
-- The freedom to study how the program works, and change it so it does your computing as you wish (freedom 1). Access to the source code is a precondition for this.
+- The freedom to study how the program works, and change it so it does your computing as you wish (freedom 1).
 - The freedom to redistribute copies so you can help others (freedom 2).
-- The freedom to distribute copies of your modified versions to others (freedom 3). By doing this you can give the whole community a chance to benefit from your changes. Access to the source code is a precondition for this.
+- The freedom to distribute copies of your modified versions to others (freedom 3).
 
+# Types of license
 
-# When to make your code open
+- "Copyleft" e.g. [GPL3](https://choosealicense.com/licenses/gpl-3.0/) - better for academic collaboration
+- More permissive e.g. [MIT](https://choosealicense.com/licenses/mit/) - better for private sector collaboration
 
-- Explicit permission of every co-author and copyright holder is needed.
+[choosealicence.com](choosealicence.com)
 
-- In the case of an industrial collaboration they might not want the code to be made public. 
+*Presenter follow links.*
 
+# Reasons **not** to make code open
 
-# Potential fears of open sourceing the code
+- Wait for publication
+- Want to commercialise
+- Don't have permission (e.g. co-authors / collaborations)
+- Shyness / fear
 
-- If the code is made public their work will be "stolen" by another University.
+# Wait for publication...
 
-- Someone will find an embarrassing bug in it.
+Fear of scoop by a competing group.
 
+- Open code:
+  - Faster impact
+  - More eyes, less bugs
 
-# Potential solutions
+# Want to commercialise...
 
-- Hold off the opening of the software until the paper is submitted/published.
+Explore options for spin outs / licensing early (*Research Services Impact & IP Team*).
 
-- Embarassing to have a paper submitted and then find a bug later. 
-    - By opening your code and allowing more contributions you increase the quality of the code.
+# Don't have permission...
 
-# How to make your code free and open
+- Ask for permission from co-authors.
+- Check what project-specific restrictions are in place.
+
+# Shyness / fear
+
+- "My code isn't good enough."
+- "My code isn't valuable."
+
+# How to open source
 
 - Choose a licence, agreed by everyone on the project.
 - Put the licence text in a file alongside your code.
 - Publish your code somewhere such as GitHub or GitLab.
-
+- Reference specific versions using [ORDA]().
 
 # Choose a licence
 
 - There are lots of possible ways to license your code, with their own pros and cons. e.g. a website like [choosealicense.com](https://choosealicense.com).
-
 - How permissive you want to be, e.g. MIT license.
 
 # Apply the licence
 
- - Most licenses rewquire a single file like `LICENSE` or `LICENSE.txt`.
+![](images/license-file.png)
 
+- Most licenses require a single file like `LICENSE` or `LICENSE.txt`.
 - Some licences advise that you should put a message at the top of every file.
 
 # Publish
 
-- GitHub
+![](images/auto-license.png)
 
 # University of Sheffield advice
 
