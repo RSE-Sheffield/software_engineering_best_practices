@@ -15,13 +15,17 @@ Relaxes conditions imposed by copyright in specific ways.
 
 # Examples of open source
 
+::: incremental
+
 * Linux
 * Firefox
 * Python
 * VSCode (Microsoft)
 * PyTorch (Facebook)
 
-# FAIR Priniciples
+:::
+
+# Motivation: FAIR Priniciples
 
 ![](https://the-turing-way.netlify.app/_images/fair-principles.jpg){ height=300px }
 
@@ -47,18 +51,26 @@ The Turing Way project illustration by Scriberia. Used under a CC-BY 4.0 licence
 
 # Reasons **not** to make code open
 
+::: incremental
+
 - Wait for publication
 - Want to commercialise
 - Don't have permission (e.g. co-authors / collaborations)
 - Shyness / fear
 
+:::
+
 # Wait for publication...
 
 Fear of scoop by a competing group.
 
+::: incremental
+
 - Open code:
   - Faster impact
   - More eyes, less bugs
+
+:::
 
 # Want to commercialise...
 
@@ -68,20 +80,32 @@ Explore options for spin outs / licensing early (*Research Services Impact & IP 
 
 # Don't have permission...
 
+::: incremental
+
 - Ask for permission from co-authors.
 - Check what project-specific restrictions are in place.
 
+:::
+
 # Shyness / fear
+
+::: incremental
 
 - "My code isn't good enough."
 - "My code isn't valuable."
 
+:::
+
 # How to open source
+
+::: incremental
 
 - Choose a licence, agreed by everyone on the project.
 - Put the licence text in a file alongside your code.
 - Publish your code somewhere such as GitHub or GitLab.
 - Reference specific versions using [ORDA](https://orda.shef.ac.uk/), [Zenodo](https://zenodo.org/) or equivalent.
+
+:::
 
 # Choose a license
 
