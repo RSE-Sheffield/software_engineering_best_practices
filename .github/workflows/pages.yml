@@ -35,7 +35,7 @@ jobs:
         with:
           args: >-  # allows you to break string into multiple lines
             --self-contained   
-            -t slidy
+            -t html5
             -o docs/index.html
             00_Index.md
         
