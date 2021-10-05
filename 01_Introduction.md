@@ -42,9 +42,17 @@ Former chicken/physics researcher, now research software engineer.
 * Ask questions in chat.
 * Use "Raise hand" when you finish an exercise.
 
+# Blackboard Collaborate
+![](images/blackboard_colab_screenshot.png){ height=512px }
+
+# 
+![](images/blackboard_colab_screenshot_detail.png){ height=512px }
+
 # Principles are general
 
-We're doing this in `Python`. C, C++, R, Fortran, Julia, Go and Rust have their own specific tools and techniques.
+We're doing this in `Python`.
+
+C, C++, R, Fortran, Julia, Go and Rust have their own specific tools and techniques.
 
 # Running order
 
