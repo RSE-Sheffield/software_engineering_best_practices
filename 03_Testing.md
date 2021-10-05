@@ -1,5 +1,7 @@
 ## Testing
 
+<style> .reveal { font-size: 2em; } </style>
+
 ### How do we know our code is reliable?
 
 ### How do we know it returns an expected response?
