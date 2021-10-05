@@ -38,7 +38,9 @@ Former chicken/physics researcher, now research software engineer.
 
 # Delivery
 
-Mix of short presentations and self directed exercises.
+* Mix of short presentations and self directed exercises.
+* Ask questions in chat.
+* Use "Raise hand" when you finish an exercise.
 
 # Principles are general
 
