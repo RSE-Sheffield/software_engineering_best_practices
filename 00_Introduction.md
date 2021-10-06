@@ -30,11 +30,11 @@ Former chicken/physics researcher, now research software engineer.
 
 13 RSEs, 35 projects / year worth ~£11m total
 
-# Main Topics
+# Learning Objectives
 
-1. documentation
-2. licensing
-3. testing
+* Add documentation directly into python code using “docstrings”.
+* How and when to make your code open source.
+* Write tests (using `pytest`) so you can update your code with confidence.
 
 # Delivery
 
