@@ -25,31 +25,60 @@
     <div class="slides">
 
 
-<section id="testing" class="slide level2">
-<h2>Testing</h2>
-<style> .reveal { font-size: 2em; } </style>
+<section id="testing" class="slide level1">
+<h1>Testing</h1>
+<style>
+    .reveal section p {
+    display: inline-block;
+    font-size: 0.8em;
+    line-height: 1em;
+    vertical-align: top;
+  }
+</style>
+</section>
+<section id="section" class="slide level1">
+<h1></h1>
 <h3 id="how-do-we-know-our-code-is-reliable">How do we know our code is reliable?</h3>
 <h3 id="how-do-we-know-it-returns-an-expected-response">How do we know it returns an expected response?</h3>
-<h3 id="how-de-we-know-our-code-plays-nicely-with-other-modules-and-scripts">How de we know our code plays nicely with other modules and scripts?</h3>
+<h3 id="how-do-we-know-our-code-plays-nicely-with-other-modules-and-scripts">How do we know our code plays nicely with other modules and scripts?</h3>
 <h3 id="we-test">We test!</h3>
 </section>
-<section id="why-do-we-test" class="slide level2">
-<h2>Why do we Test?</h2>
+<section id="why-do-we-test" class="slide level1">
+<h1>Why do we Test?</h1>
+<div>
 <ul>
-<li><p>When we produce new code, we want to know it is fit for purpose. However, it can be difficult to test new code in isolation when at runtime it will form part of a larger software package.</p></li>
-<li><p>Just as with any other scientific/research endeavour, we want to ensure that our results are reliable, reproducible and trustworthy.</p></li>
-<li><p>As software grows, our codebase becomes bigger and our dependencies become more complex. When we rewrite and update code, we want to know that our new code works as intended, both in its basic functionality and as part of a bigger web of dependencies.</p></li>
-<li><p>Writing tests for your software will save you time and headaches in the long run</p></li>
+<li class="fragment"><p>To know that new code produces the expected results</p></li>
+<li class="fragment"><p>Just as with any research, we want to ensure our results are reliable, reproducible and trustworthy.</p></li>
+<li class="fragment"><p>As software grows, our codebase becomes bigger and more complex.</p></li>
+<li class="fragment"><p>When we rewrite and update code, we want to know that our new code works as intended, both in its basic functionality and as part of a bigger web of dependencies.</p></li>
+<li class="fragment"><p><em>Writing</em> tests for your software will save you time and headaches in the long run</p></li>
 </ul>
+</div>
 </section>
-<section id="when-do-we-test" class="slide level2">
-<h2>When do we test?</h2>
+<section id="when-do-we-test" class="slide level1">
+<h1>When do we test?</h1>
+<div>
 <ul>
-<li><p>Tests should be written alongside code, one test per ‘unit’ of code</p></li>
-<li><p>In Python, a ‘unit’ would generally be considered to be a function or class</p></li>
-<li><p>We begin the next workshop by producing a unit test for function we have written</p></li>
-<li><p>But! Test can be written <em>before</em> we write any code, this is known as Test Driven Development (TDD)</p></li>
-<li><p>By writing tests alongside your code, we know that as long as our tests are passing, our previously written code doesn’t need to revisited</p></li>
+<li class="fragment"><p>Tests should be written alongside code, one test per ‘unit’ of code</p></li>
+<li class="fragment"><p>In Python, a ‘unit’ would generally be considered to be a function or class</p></li>
+<li class="fragment"><p>Any time that you manually run something and check the result</p></li>
+<li class="fragment"><p>But! Tests can be written <em>before</em> we write any code, this is known as Test Driven Development (TDD)</p></li>
+<li class="fragment"><p>By writing tests alongside your code, we know that as long as our tests are passing, our previously written code doesn’t need to be revisited</p></li>
+</ul>
+</div>
+</section>
+<section id="types-of-test" class="slide level1">
+<h1>Types of test</h1>
+<h3 id="unit-test">Unit Test *</h3>
+<h3 id="integration-test">Integration Test</h3>
+<h3 id="regression-test">Regression Test</h3>
+<h3 id="performance-test">Performance Test</h3>
+</section>
+<section id="how-to-test" class="slide level1">
+<h1>How to test</h1>
+<ul>
+<li><p>In Python, <code>pytest</code> is the most popular framework</p></li>
+<li><p>In the next exercise we’ll produce a unit test for a function, using <code>pytest</code></p></li>
 </ul>
 </section>
     </div>
