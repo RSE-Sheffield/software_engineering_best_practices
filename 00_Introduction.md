@@ -33,7 +33,6 @@ Former chicken/physics researcher, now research software engineer.
 # Learning Objectives
 
 * Add documentation directly into python code using “docstrings”.
-* How and when to make your code open source.
 * Write tests (using `pytest`) so you can update your code with confidence.
 
 # Delivery
@@ -58,9 +57,8 @@ C, C++, R, Fortran, Julia, Go and Rust have their own specific tools and techniq
 
 1. Presentation - why bother with documentation?
 2. Exercise - documentation.
-3. Presentation - software licensing.
-4. Presentation - why bother with testing?
-5. Exercise - testing.
-6. Check in!
-7. Exercise - fixtures.
-8. Close.
+3. Presentation - why bother with testing?
+4. Exercise - testing.
+5. Check in!
+6. Exercise - fixtures.
+7. Close.
