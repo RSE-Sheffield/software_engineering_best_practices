@@ -21,7 +21,7 @@
       padding-top: 50px;
       padding-bottom: 50px;
       hyphens: auto;
-      word-wrap: break-word;
+      overflow-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
     }
@@ -29,6 +29,9 @@
       body {
         font-size: 0.9em;
         padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
       }
     }
     @media print {
@@ -92,6 +95,7 @@
     pre code {
       padding: 0;
       overflow: visible;
+      overflow-wrap: normal;
     }
     .sourceCode {
      background-color: transparent;
@@ -133,6 +137,12 @@
     #TOC li {
       list-style: none;
     }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
     #TOC a:not(:hover) {
       text-decoration: none;
     }
@@ -149,12 +159,13 @@
   <![endif]-->
 </head>
 <body>
-<h1 id="good-software-engineering-practises">Good Software Engineering Practises</h1>
-<p>Based on <a href="https://gitlab.com/milliams/software_engineering_best_practices">“Best Practises in Software Engineering”</a> by Matt Williams.</p>
+<h1 id="good-software-engineering-practises">Good Software Engineering
+Practises</h1>
+<p>Based on <a href="https://gitlab.com/milliams/software_engineering_best_practices">“Best
+Practises in Software Engineering”</a> by Matt Williams.</p>
 <h2 id="slides">Slides</h2>
 <ul>
 <li><a href="introduction.html">Introduction</a></li>
-<li><a href="licensing.html">Licensing</a></li>
 <li><a href="documentation.html">Documentation</a></li>
 <li><a href="testing.html">Testing</a></li>
 <li><a href="summary.html">Summary</a></li>

@@ -34,9 +34,11 @@ pre, code, .prompt {
 	font-family: 'Source Code Pro', monospace;
 	padding-top: 0px;
 	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-top: 0.4em;  /*Align prompt vertically with cell contents*/
 }
 
-.rendered_html p code {
+.rendered_html code {
         padding-top: 0px;
         padding-bottom: 0px;
 }
@@ -66,7 +68,7 @@ div#notebook-container {
 }
 
 .prompt {
-	min-width: 18ex;
+	min-width: 20ex;
 }
 
 img.icon {
@@ -118,4 +120,20 @@ dl {
 
 dd {
 	margin-left: 1.5em;
+}
+
+.highlight {
+    background: #ffffff;
+    border-left-color: #e8e8e8;
+    border-left-width: 1px;
+    border-left-style: double;
+    margin-left: 1em;
+}
+
+.rendered_html .highlight pre {
+	margin: 1em;
+}
+
+div.cell {
+	border: 0px;
 }
