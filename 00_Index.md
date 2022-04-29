@@ -5,7 +5,6 @@ Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/
 ## Slides
 
 * [Introduction](introduction.html)
-* [Licensing](licensing.html)
 * [Documentation](documentation.html)
 * [Testing](testing.html)
 * [Summary](summary.html)

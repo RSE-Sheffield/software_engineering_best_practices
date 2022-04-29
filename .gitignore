@@ -5,3 +5,7 @@ venv
 .ipynb_checkpoints/
 __pycache__/
 reveal*/*
+
+# IDE
+
+.vscode
