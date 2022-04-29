@@ -7,7 +7,7 @@ Based on ["Best Practises in Software Engineering"](https://gitlab.com/milliams/
 * [Introduction](introduction.html)
 * [Documentation](documentation.html)
 * [Testing](testing.html)
-* [Summary](summary.html
+* [Summary](summary.html)
 
 ## Notebooks
 
